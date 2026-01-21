@@ -6,31 +6,6 @@ Official implementation of **"Disentangled Concept-Residual Models: Bridging the
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/pytorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 
-## Abstract
-
-Concept Bottleneck Models (CBMs) enhance interpretability by predicting human-understandable concepts before making final predictions. Concept Residual Models (CRMs) extend CBMs by adding a residual pathway to capture information not represented by the predefined concepts. However, we identify a critical issue: **concept-residual overlap**, where residuals redundantly encode concept information, undermining the interpretability benefits of concept interventions.
-
-We propose **Disentangled Concept-Residual Models (D-CRMs)**, which minimize mutual information between concept and residual representations to ensure true disentanglement. Our approach improves the effectiveness of concept interventions while maintaining predictive performance.
-
-## Key Features
-
-- Mutual information minimization between concepts and residuals using CLUB estimator
-- Improved concept intervention effectiveness
-- Comprehensive evaluation framework for measuring concept-residual disentanglement
-- Support for multiple datasets: CIFAR-100, CelebA, CUB-200-2011, OAI, AA2
-
-## Methods Compared
-
-| Method | Description |
-|--------|-------------|
-| CBM | Concept Bottleneck Model (no residual) |
-| Latent Residual | CRM with unconstrained residual (baseline) |
-| Decorrelated | CRM with cross-correlation penalty |
-| IterNorm | CRM with iterative normalization |
-| EYE | CRM with Expert Yielded Estimation regularization |
-| Adversarial | CRM with adversarial decorrelation |
-| **MI CRM (Ours)** | **D-CRM with mutual information minimization** |
-| CEM | Concept Embedding Model |
 
 ## Installation
 
@@ -193,32 +168,6 @@ python scripts/plot_concept_importance.py --exp-dir <DIR>
 ```bash
 python evaluate.py --exp-dir <AA2_DIR> --mode test_counterfactual_2 --all
 python scripts/plot_counterfactual.py --exp-dir <AA2_DIR>
-```
-
-## Project Structure
-
-```
-.
-├── train.py                 # Training script with Ray Tune
-├── evaluate.py              # Comprehensive evaluation suite
-├── plot.py                  # Result visualization
-├── lightning_ray.py         # Ray Tune + PyTorch Lightning integration
-├── utils.py                 # Utility functions
-├── nn_extensions.py         # Custom neural network modules
-├── models/                  # Model implementations
-│   ├── base.py              # ConceptModel, ConceptLightningModel
-│   ├── concept_embedding.py # Concept Embedding Model (CEM)
-│   ├── mutual_info.py       # MI minimization (D-CRM)
-│   ├── adversarial_decorrelation.py
-│   └── whitening.py         # Concept whitening
-├── lib/                     # Core algorithms
-│   ├── club.py              # CLUB MI estimator
-│   ├── mine.py              # MINE MI estimator
-│   └── iterative_normalization.py
-├── datasets/                # Dataset loaders
-├── experiments/             # Experiment configurations
-├── configs/                 # Paper experiment configs
-└── scripts/                 # Plotting scripts for paper figures
 ```
 
 ## Citation
