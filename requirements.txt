@@ -1,0 +1,10 @@
+h5py
+matplotlib
+open_clip_torch
+pandas
+pynvml
+pytorch_lightning>=2
+ray[air,tune]>=2.7
+tensorboard
+torch>=2
+torchvision
